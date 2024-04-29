@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+void main() {
+	float A, B, C, t,dt,num,anal;
+	//differentiation
+	cout << "Enter A B" << endl;
+	cin >> A >> B;
+	cout << "Enter t dt" << endl;
+	cin >> t >> dt;
+	anal = A * cos(t)-B*sin(t);
+	num = ((A * sin(t + dt)+B*cos(t+dt)) -( A * sin(t)+B*cos(t))) / dt;
+	cout << "num : " << num << ", anal : " << anal <<endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n";
+
+	//integration
+	float a, b;
+	int N;
+	cout << "Enter a b" << endl;
+	cin >> a >> b;
+	cout << "Enter N" << endl;
+	cin >> N;
+	anal = (-A * cos(b) + B * sin(b)) - (-A * cos(a) + B * sin(a));
+	dt = (b - a) / N;
+	num = 0;
+	for (int i = 0; i < N; i++) {
+		num += ((A * sin(a + dt * i) + B * cos(a + dt * i)) * dt);
+	}
+	cout << "num : " << num << ", anal : " << anal << endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n";
+}
