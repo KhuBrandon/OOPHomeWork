@@ -1,0 +1,37 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+void AII(int n1, int n2, float* b, float* c, float* data) {
+	for (int i = 0; i < n1; i++) {
+		data[i + 1] = b[i] * 5;
+	}
+	for (int i = 0; i < n2; i++) {
+		data[i + 6] = c[i] * c[i];
+	}
+	ofstream xx("mybin4.dat", ios::binary | ios::out);
+	if (!xx) cout << "file not found";
+	xx.write((char*)data, 9 * sizeof(float));
+	xx.close();
+}
+int main() {
+	float* data;
+	data = new float[44];
+	int a[] = { 1234 };
+	float b[] = { 1000,2000,3000,4000,5000 };
+	float c[] = { -0.5,0,0.5 };
+	data[0] = a[0];
+	float d[44];
+	//input
+	AII(5, 3, b, c, data);
+	//output
+	ifstream yy("mybin4.dat", ios::binary | ios::in);
+	if (!yy) return 0;
+	float A[44];
+	yy.read((char*)A, 9 * sizeof(float));
+	yy.close();
+	cout << "Method 4 :" << endl;
+	for (int i = 0; i < 9; i++) {
+		cout << A[i] << endl;
+	}
+	return 1;
+}
