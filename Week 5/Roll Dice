@@ -1,0 +1,41 @@
+#include<iostream>
+#include<fstream>
+#include<cmath>
+using namespace std;
+double factorial(int n) {
+	if (n == 0 || n == 1)
+		return 1;
+	else
+		return n * factorial(n - 1);
+}
+int main() {
+	double p, * Experiment, * Theory;
+	int n, k, N, count;
+	cout << "Enter n" << endl;
+	cin >> n;
+	cout << "Enter N" << endl;
+	cin >> N;
+	p = 1.0 / 6.0;
+	Experiment = new double[n + 1];
+	Theory = new double[n + 1];
+	for (k = 0; k <= n; k++) {
+		Experiment[k] = 0;
+	}
+	for (k = 0; k < N; k++) {
+		count = 0;
+		for (int i = 0; i < n; i++) {
+			if ((rand() / (double)RAND_MAX) < p) count++;
+		}
+		Experiment[count]++;
+	}
+	for (k = 0; k <= n; k++) {
+		Experiment[k] /= (double)N;
+	}
+	ofstream x("binomial.txt");
+	for (k = 0; k <= n; k++) {
+		Theory[k] = (factorial(n) / (factorial(k) * factorial(n - k))) * pow(p, k) * pow((1 - p), (n - k));
+		x << k << " " << Experiment[k] << " " << Theory[k] << endl;
+	}
+	x.close();
+	return 1;
+}
