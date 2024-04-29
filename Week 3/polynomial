@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main() {
+	double A, B, C, t, dt, num, anal;
+	//differentiation
+	cout << "Enter A B C"<<endl;
+	cin >> A >> B >> C;
+	cout << "Enter t dt" << endl;
+	cin >> t >> dt;
+	anal = 2 * A * t + B;
+	num = (((A * (t + dt) * (t + dt)) + B * (t + dt) + C) - (A * t * t + B * t + C) )/ dt;
+	cout << "num : " << num << ", anal : " << anal << endl;
+	cout << "error=" << (num - anal) / anal * 100 << "%\n";
+	//integration
+	double a, b;
+	int N;
+	cout << "Enter a b"<<endl;
+	cin >> a >> b;
+	cout << "Enter N" << endl;
+	cin >> N;
+	anal = A * (pow(b, 3) - pow(a, 3)) / 3 + B * (pow(b, 2) - pow(a, 2)) / 2 + C * (b - a);
+	dt = (b - a) / N;
+	num = 0;
+	for (int i = 0; i < N; i++) {
+		num +=( A * pow(a + dt * i, 2) * dt + B * (a + dt * i) * dt + C * dt);
+	}
+	cout << "num : " << num << ", anal : " << anal << endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n"<<endl;
+}
