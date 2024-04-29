@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+void main() {
+	float B, A, C, dt, t, num, anal;
+	//differentiation
+	cout << "Enter A B C" << endl;
+	cin >> A >> B >> C;
+	cout << "Enter t dt" << endl;
+	cin >> t >> dt;
+	anal = C / (t * log(B));
+	num = C * ((log(A * (t + dt)) / log(B)) - (log(A * t) / log(B))) / dt;
+	cout << "num : " << num << ", anal : " << anal << endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n" << endl;
+	float a, b;
+	//intergration
+	int N;
+	cout << "Endter a b" << endl;
+	cin >> a >> b;
+	cout << "Enter N" << endl;
+	cin >> N;
+	anal = ((C * b * log(b)) / log(B)) + ((C * b * log(A)) / log(B)) - ((C * b) / log(B)) - ((C * a * log(a)) / log(B)) - ((C * a * log(A)) / log(B)) + (C * a / log(B));
+	dt = (b - a) / N;
+	num = 0;
+	for (int i = 0; i < N; i++) {
+		num += (C * (log(A * (a + dt * i)) / log(B)) * dt);
+	}
+	cout << "num : " << num << ", anal : " << anal << endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n" << endl;
+}
