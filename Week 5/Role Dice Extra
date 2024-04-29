@@ -1,0 +1,32 @@
+#include<iostream>
+#include<fstream>
+#include<cmath>
+using namespace std;
+int main() {
+	double p, * Experiment, * Theory;
+	int n = 20, k, N = 10000, count;
+	p = 1.0 / 6.0;
+	Experiment = new double[n + 1];
+	Theory = new double[n + 1];
+	for (k = 1; k <= n; k++) {
+		Experiment[k] = 0;
+	}
+	for (k = 0; k < N; k++) {
+		count = 1;
+		for (int i = 0; i < n; i++) {
+			if ((rand() / (double)RAND_MAX) > p) count++;
+			else break;
+		}
+		Experiment[count]++;
+	}
+	for (k = 0; k <= n; k++) {
+		Experiment[k] /= (double)N;
+	}
+	ofstream x("geometrical.txt");
+	for (k = 1; k <= n; k++) {
+		Theory[k] = pow((1 - p), k - 1) * p;
+		x << k << " " << Experiment[k] << " " << Theory[k] << endl;
+	}
+	x.close();
+	return 1;
+}
