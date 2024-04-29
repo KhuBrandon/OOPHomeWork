@@ -1,0 +1,21 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main() {
+	ifstream xx("Beatles-LetItBe-wav_30s.wav", ios::binary | ios::in);
+	if (!xx) {
+		return 0;
+	}
+	char header[44];
+	xx.read(header, 44);
+	short* NC;
+	int* FS;
+	int* BR;
+	NC = (short*)(header + 22);
+	FS = (int*)(header + 24);
+	BR = (int*)(header + 28);
+	cout << "NumChannels : " << *NC << endl;
+	cout << "SampleRate : " << *FS << endl;
+	cout << "ByteRate : " << *BR << endl;
+	return 1;
+}
