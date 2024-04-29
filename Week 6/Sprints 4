@@ -1,0 +1,70 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+float getLength(int eu) {
+	float T=0;
+	if (eu == 4) T = 1.0;
+	else if (eu == 8) T = 0.5;
+	else if (eu == 16) T = 0.25;
+	return T;
+}
+float getFrequency(char hh) {
+	float f;
+	if (hh == 'C') f = 261;
+	else if (hh == 'D') f = 294;
+	else if (hh == 'E') f = 330;
+	else if (hh == 'F') f = 349;
+	else if (hh == 'G') f = 392;
+	else if (hh == 'A') f = 440;
+	else if (hh == 'B') f = 494;
+	else f = 523;
+	return f;
+}
+float getAmplitude(int ss) {
+	float A;
+	A = ss * 1000;
+	return A;
+}
+int main() {
+	ifstream xx("Beatles-LetItBe-wav_30s.wav", ios::binary | ios::in);
+	if (!xx) {
+		return 0;
+	}
+	char header[44];
+	xx.read(header, 44);
+	short* NC;
+	int* FS;
+	int* BR;
+	NC = (short*)(header + 22);
+	FS = (int*)(header + 24);
+	BR = (int*)(header + 28);
+	int N = FS[0];
+	short* data;
+	data = new short[N];
+	const float pi = 3.141592;
+	*NC = 1;
+	*BR = NC[0] * FS[0] * sizeof(short);
+	ofstream yy("mySprint4.wav", ios::binary | ios::out);
+	if (!yy) {
+		return 0;
+	}
+	yy.write(header, 44 * sizeof(char));
+	ifstream zz("Note.txt");
+	int n1, eu, ss;
+	char hh;
+	float f, A, T, dt = 1. / FS[0];
+	zz >> n1;
+	for (int i = 0; i < n1; i++) {
+		zz >> eu >> hh >> ss;
+		T = getLength(eu);
+		f = getFrequency(hh);
+		A = getAmplitude(ss);
+		float t = 0;
+		for (int j = 0; j < FS[0] * T; j++,t+=dt) {
+			data[j] = (short)(A * sin(2.0 * pi * f * t));
+		}
+		yy.write((char*)data, FS[0] *T* sizeof(short));
+	}
+	yy.close();
+	return 1;
+}
