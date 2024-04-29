@@ -1,0 +1,19 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main() {
+	ofstream xx("function.txt");
+	if (!xx) {
+		cout << " can't open file" << endl;
+		return 0;
+	}
+	float t, dt, T, pi = 3.141592;
+	t = 0.0;
+	dt = 0.0016;
+	T = 0.08;
+	for (t = 0.0; t < T; t += dt) {
+		xx << t << " " << 100*cos(20 * pi * t) * cos(220 * pi * t) << " " << 60 * sin(240 * pi * t) + 80 * sin(220 * pi * t) << endl;
+	}
+	xx.close();
+	return 1;
+}
