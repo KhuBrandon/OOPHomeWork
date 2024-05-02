@@ -1,0 +1,74 @@
+int state=0; // 메인메뉴, 플레이화면, 게임오버 구현 위한 state
+int frames = 0;
+myitem [] enermy;
+player me;
+void setup(){
+  size(800,1000);
+  frameRate(60);
+  enermy = new myitem[8];
+  me = new player();
+  for (int i = 0; i<8; i++){
+    enermy[i] = new myitem();
+  }
+}
+
+void draw(){
+  if(state == 0) mainMenu(); //state가 0상태이면 메인메뉴 화면입니다
+  else if(state ==1) playing(); //state가 1상태이면 플레이 화면입니다
+  else gameOver(); //state가 2상태이면 게임오버 화면입니다
+}
+
+void mousePressed(){ //클릭에 관한 동작입니다
+  if(state == 0) {//메인메뉴일 때
+    if(mouseX > width/2 - 200 && mouseX < width/2 + 200
+    && mouseY > height/2 + 300 && mouseY < height/2 + 400)
+    state =1;
+  }
+  if(state == 2) {//게임오버 화면일 때
+    if(mouseX > width/2 - 200 && mouseX < width/2 + 200
+    && mouseY > height/2 + 300 && mouseY < height/2 + 400)
+    frames = 0;//점수를 0으로 초기화합니다
+    for(int i=0; i<8; i++){// 모든 적들을 화면 상단으로 이동시킵니다
+      enermy[i].w = 0;
+    }
+    state =1;//플레이 화면으로 넘어갑니다
+  }
+}
+  
+    
+
+void mainMenu(){// 메인메뉴 구성입니다
+ background(181, 206, 235); fill(255);
+ rect(width/2 -200, height/2 + 300, 400, 100);
+ fill(0);
+ textSize(60);
+ text("Start", width/2 -63, height/2 + 365);
+}
+  
+void playing(){//플레이화면입니다
+  background(181, 206, 235);
+  frames++;//매 초 100점을 획득합니다
+  fill(255);
+  textSize(60);
+  text("Score: " + frames*100/60, 275, 70);// 화면 상단에 점수를 표시합니다
+  me.x = mouseX;
+  me.y = mouseY;
+  me.makeDitto();
+  for(int i=0; i<8; i++){ // 적 캐릭터
+    enermy[i].act();
+    enermy[i].life();
+      if((enermy[i].q-100 ) < me.x && me.x < (enermy[i].q+100 ) && (enermy[i].w-100) < me.y && me.y < (enermy[i].w +100)) state = 2;
+      //플레이어블 캐릭터가 각 캐릭터의 일정 영역 안에 들어오면 부딪힌 것으로 간주하고 게임오버됩니다(state를 2로 바꿉니다)
+  }
+}
+  
+void gameOver(){//게임 오버 화면 구성입니다
+  background(181, 206, 235);
+  fill(255);
+  textSize(60);
+  text("Score: " + frames*100/60, 275, 70);// 화면 상단에 점수를 표시합니다
+  rect(width/2 -200, height/2 + 300, 400, 100);
+  fill(0);
+  textSize(60);
+  text("Restart", width/2 -90, height/2 + 365);
+}
