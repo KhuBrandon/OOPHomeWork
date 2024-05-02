@@ -1,0 +1,93 @@
+class myitem{ // enemy 캐릭터
+  int q,w,dd;
+  myitem(){
+    q=int(random(0,width));
+    w=0;
+    vq=random(-3,3);
+    vw=random(3,5);
+  }
+  void life(){
+    fill(255);
+    circle(q,w,150);
+    fill(255,100,100);
+    square(q-50,w-50,100);
+    rect(q-35,w+50,20,25);
+    rect(q+15,w+50,20,25);
+    fill(255);
+    circle(q,w-25,30);  
+    fill(0);
+    circle(q,w-25,15);
+    rect(q-30,w+5,60,30);
+    fill(255);
+    rect(q-20,w+5,15,10);
+    rect(q+5,w+5,15,10);
+  }
+  float vq, vw;
+    void act(){
+    q+=vq;
+    w+=vw;
+    if(q>width || q<0) vq=-vq;
+    if(w>height) w=0;
+  }
+}
+
+//player 캐릭터/////////////////////////
+class player {
+  // constructor
+  player() {
+    d = 1.5; colorCode = 1;
+  }
+  
+  //member data
+  float x, y, d;
+  int colorCode; // 아래 fill()부분 if(colorCode ==0){}형식으로 바꾸기
+  
+  //member function
+  void makeDitto(){
+    makeBody();
+    makeHand();
+    makeHead();
+    makeSkin();
+    makeCurve();
+    face();
+  }
+  void makeBody(){
+    if(colorCode ==0) fill(174, 153, 212);
+    else fill(109, 168, 211);
+    stroke(0);
+    strokeWeight(d);
+    arc(x, y + 35*d, 80*d, 80*d, PI, 2*PI);
+    line(x - 40*d, y + 35*d, x + 40*d, y + 35*d);
+  }
+  void makeHand(){
+    ellipse(x - 30*d, y - 5*d, 35*d, 20*d);
+    ellipse(x + 30*d, y - 5*d, 35*d, 20*d);
+  }
+  void makeHead(){
+    ellipse(x - 10*d, y - 15*d, 27*d, 16*d);
+    ellipse(x + 10*d, y - 15*d, 27*d, 16*d);
+  }
+  void makeSkin(){
+    stroke(174,153,212);
+    strokeWeight(0);
+    rect(x - 38*d,y - 19*d, 76*d, 45*d);
+    square(x - 4*d, y - 20.5*d, 6*d);
+  }
+  void makeCurve(){
+    fill(181, 206, 235);
+    stroke(0);
+    strokeWeight(d);
+    arc(x - 41*d, y + 13.7*d, 14*d, 21*d, 0, 0.375*PI);
+    arc(x - 41*d, y + 13.7*d, 14*d, 21*d, 1.55*PI, 2*PI);
+    arc(x + 41*d, y + 13.7*d, 14*d, 21*d, 0.62*PI, 1.45*PI);
+    arc(x - 47*d, y - 28.5*d, 63*d, 31*d, 0.18*PI, 0.42*PI);
+    arc(x + 47*d, y - 28.5*d, 63*d, 31*d, 0.58*PI, 0.82*PI);
+  }
+  void face(){
+    point(x - 10*d, y - 13*d);
+    point(x + 10*d, y - 13*d);
+    if(colorCode ==0) fill(174, 153, 212);
+    else fill(109, 168, 211);
+    arc(x, y - 11*d, 40*d, 15*d, 0.2*PI, 0.8*PI);
+  }
+}
