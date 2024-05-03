@@ -1,0 +1,68 @@
+int state=0; // 메인메뉴, 플레이화면, 게임오버 구현 위한 state
+int frames = 0; // 점수 표시 위한 frames
+Ditto [] enermy;
+myitem me;
+void setup(){
+  size(800,1000);
+  frameRate(60);
+  enermy = new Ditto[6];
+  me = new myitem();
+  for (int i = 0; i<3; i++) enermy[i] = new Ditto(1.5, i);
+  for (int i = 3; i<6; i++) enermy[i] = new Ditto(1.5, 1, i);  // 두 constructor 이용한 색 다른 메타몽 지정
+}
+
+void draw(){
+  if(state == 0) mainMenu(); //state = 0이면 메인메뉴 화면
+  else if(state ==1) playing(); //state = 1이면 플레이 화면
+  else gameOver(); //state = 2이면 게임오버 화면
+}
+
+void mousePressed(){ //클릭에 관한 동작
+  if(state == 0) {
+    if(mouseX > width/2 - 200 && mouseX < width/2 + 200
+    && mouseY > height/2 + 300 && mouseY < height/2 + 400)
+    state =1;
+  }
+  if(state == 2) {
+    if(mouseX > width/2 - 200 && mouseX < width/2 + 200
+    && mouseY > height/2 + 300 && mouseY < height/2 + 400)
+    frames = 0;//점수를 0으로 초기화
+    state =1;//플레이 화면으로 전환
+  }
+}
+// 메인메뉴 구성
+void mainMenu(){
+ background(181, 206, 235); fill(255);
+ rect(width/2 -200, height/2 + 300, 400, 100);
+ fill(0);
+ textSize(60);
+ text("Start", width/2 -63, height/2 + 365);
+}
+//플레이 화면 구성
+void playing(){
+  background(181, 206, 235);
+  frames++;//매 초 100점을 획득
+  fill(255);
+  textSize(60);
+  text("Score: " + frames*100/60, 275, 70);// 화면 상단에 점수 표시
+  me.x = mouseX; me.y = mouseY;
+  me.life();
+  for(int i=0; i<6; i++){ // 적 캐릭터(메타몽)
+      enermy[i].act();                //움직이는 메타몽 그리기
+      me.collide(enermy[i]);
+      for(int j = 0; j < 6; j++){             //각 메타몽이 충돌하면 collide 실행
+        if(i != j) enermy[i].collide(enermy[j]);
+      }
+  }
+}
+//게임 오버 화면 구성
+void gameOver(){
+  background(181, 206, 235);
+  fill(255);
+  textSize(60);
+  text("Score: " + frames*100/60, 275, 70);// 화면 상단에 점수를 표시합니다
+  rect(width/2 -200, height/2 + 300, 400, 100);
+  fill(0);
+  textSize(60);
+  text("Restart", width/2 -90, height/2 + 365);
+}
