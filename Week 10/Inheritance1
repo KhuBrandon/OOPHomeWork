@@ -1,0 +1,18 @@
+class enermy extends myitem {
+  enermy(int i) {
+    super(i);
+  }
+  void life1() {
+    fill(181, 206, 235);
+    circle(x, y, 170);
+    fill(0);
+    rect(x-60, y-60, 120, 50);
+    life();
+  }
+  void act() {
+    x+=vx;
+    y+=vy;
+    if (x>width || x<0) vx=-vx;
+    if (y>height||y<0) vy=-vy;
+  }
+}
