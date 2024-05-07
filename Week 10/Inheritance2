@@ -1,0 +1,13 @@
+class me extends myitem {
+  me() {
+    super(-1);
+  }
+  void life2() {
+    fill(181, 206, 235);
+    circle(x, y, 170);
+    life();
+    fill(0, 255, 0);
+    rect(x-40, y+70, 25, 15);
+    rect(x+15, y+70, 25, 15);
+  }
+}
