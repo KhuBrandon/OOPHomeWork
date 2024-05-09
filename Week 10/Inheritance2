@@ -4,10 +4,10 @@ class me extends myitem {
   }
   void life2() {
     fill(181, 206, 235);
-    circle(x, y, 170);
+    circle(x, y, 170*d);
     life();
     fill(0, 255, 0);
-    rect(x-40, y+70, 25, 15);
-    rect(x+15, y+70, 25, 15);
+    rect(x-40*d, y+70*d, 25*d, 15*d);
+    rect(x+15*d, y+70*d, 25*d, 15*d);
   }
 }
