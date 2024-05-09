@@ -4,9 +4,9 @@ class enermy extends myitem {
   }
   void life1() {
     fill(181, 206, 235);
-    circle(x, y, 170);
+    circle(x, y, 170*d);
     fill(0);
-    rect(x-60, y-60, 120, 50);
+    rect(x-60*d, y-60*d, 120*d, 50*d);
     life();
   }
   void act() {
