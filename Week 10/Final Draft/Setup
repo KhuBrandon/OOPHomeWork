@@ -1,0 +1,21 @@
+UI uiObject; //UI 동작을 위한 오브젝트
+enermy [] enermyObject; // 4마리의 적 유령 오브젝트
+player me; // 플레이어 오브젝트
+coin [] coinObject; // 코인 오브젝트
+void setup(){
+  size(770,940);
+  frameRate(60);
+  uiObject = new UI();
+  enermyObject = new enermy[4];
+  for (int i = 0; i<4; i++) enermyObject[i] = new enermy(385, 465, 2);
+  me = new player(385, 735, 1.25, uiObject);
+  coinObject = new coin[90];
+  for(int j=0; j<9; j++){
+      for(int k=0; k<10; k++){
+        coinObject[10*j+k] = new coin(25+90*j, 105+90*k,0.75);
+      }
+  }
+}
+void draw(){
+  uiObject.chooseScreen();
+}
