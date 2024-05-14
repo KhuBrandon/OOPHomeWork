@@ -3,12 +3,11 @@ class fruit {
 public:
 	// constructor
 	fruit() {
-		price = 200; many = 2; day = 12;// default values
+		price = 200; many = 2; // default values
 	}
 	fruit(float p, int n);
-	fruit(float p, int n, int d);
 	// member data
-	int many, day;
+	int many;
 	float price;
 	// member function
 	float show();
