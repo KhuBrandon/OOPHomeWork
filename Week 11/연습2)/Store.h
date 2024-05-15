@@ -1,18 +1,15 @@
-#include "store.h"
-float store::total() {
-	float x = apple.show();
-	x += pear.show();
-	x += peach.show();
-	x += mango.show();
-	return x;
-}
-float store::Average() {
-	float x = apple.show(),y=apple.many;
-	x += pear.show();
-	x += peach.show();
-	x += mango.show();
-	y += pear.many;
-	y += peach.many;
-	y += mango.many;
-	return x / y;
-}
+#pragma once
+#include "fruit.h"
+class store {
+public:
+	store() {};
+	store(int a, int b, int c, int d, float e, float f, float g, float h) {
+		apple = fruit(e, a);
+		pear = fruit(f, b);
+		peach = fruit(g, c);
+		mango = fruit(h, d);
+	}
+	fruit apple, pear, peach, mango;
+	float total();
+	float Average();
+};
