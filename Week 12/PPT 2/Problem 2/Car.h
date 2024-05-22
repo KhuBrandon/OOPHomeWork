@@ -11,10 +11,13 @@ public:
 	void setWheels(int);
 	int getWheels();
 	void klaxon(int);
-	void weight(int); //public 추가
+
+	friend class Engineer;
 protected:
 	float price;
 	void speedUp(float);
 	void speedDown(float);
 	void CarSeat(int); // protected 추가
+private:
+	void weight(int); 
 };
