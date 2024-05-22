@@ -4,15 +4,10 @@ using namespace std;
 #include "SUV.h"
 #include "Engineer.h"
 int main(int argc, char* argv[]) {
-	SUV* newSUV = new SUV();
-	cout << "   With Virtual" << endl; // With virtual
+	Car * newSUV = new SUV(); 
 	cout << "Maximum people : ";
 	newSUV->people();
-	cout << "   Without Virtual" << endl; // Without virtual
-	cout << "Maximun people : ";
-	newSUV->people();
 	delete newSUV;
-
 	getchar();
 	return 123;
 }
