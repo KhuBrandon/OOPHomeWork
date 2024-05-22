@@ -1,48 +1,22 @@
-#include<iostream>
+#include <iostream>
+#include "TV.h"
+#include "Oscope.h"
 using namespace std;
 
-class Person {
-public:
-    Person(int x) {
-        pNum = 12;
-        cout << "Person::Person(int) called" << endl;
-    }
-    Person() {
-        pNum = 12;
-        cout << "Person::Person() called" << endl;
-    }
-    int pNum;
-};
-
-class Faculty : virtual public Person {
-public:
-    Faculty(int x) : Person(x) {
-        fNum = 4;
-        cout << "Faculty::Faculty(int) called" << endl;
-    }
-    int fNum;
-};
-
-class Student : virtual public Person {
-public:
-    Student(int x) : Person(x) {
-        sNum = 8;
-        cout << "Student::Student(int) called" << endl;
-    }
-    int sNum;
-};
-
-class TA : public Faculty, public Student {
-public:
-    TA(int x) :  Student(x), Faculty(x) {
-        cout << "TA::TA(int) called" << endl;
-        cout << "Number of People: " << pNum << endl;
-        cout << "Number of Faculty: " << fNum << endl;
-        cout << "Number of Student: " << sNum << endl;
-    }
-};
-
 int main() {
-    TA ta1(30);
-    return 0;
+	TV tv1, tv2;
+	Oscope os1, os2;
+	cout << "(" << os1.X << " " << os1.Y << ")\n";
+	os1.turnOn();
+	cout << "  on/off " << os1.onoff << " " << os2.onoff << endl;
+
+	cout << "   voltage \n";
+	cout << os1.getVoltage() << " " << os2.getVoltage() << endl;
+
+	os1.volumeControl();
+	cout << "   volume \n";
+	cout << os1.volume << endl;
+
+
+	return 123;
 }
