@@ -3,7 +3,6 @@
 class SUV : public Car {
 private:
 	int spareWheels;
-	void Color(int); // private 추가
 public:
 	void klaxon(int);
 	void setSparewheels(int);
