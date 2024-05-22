@@ -6,14 +6,14 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	SUV* newSUV = new SUV();
 	newSUV->setPrice(45000);
-	cout << "The wheels are " << newSUV->getWheels() << endl;
 	Engineer engineer;
-	cout << "Price is " << engineer.getCarPrice(newSUV) << "dollars" << endl;
-	engineer.Klaxon(5); // public 확인
-	engineer.CarSeat(6); // protected 확인
-	engineer.Color(13); // private 확인
+	cout << "Price is " << engineer.getCarPrice(newSUV); // protected 접근
+	cout << "dollars" << endl;
+	cout << "Weight is "; 
+	engineer.getWeight(newSUV); // private 접근
+	cout << "Klaxon is " << endl;
+	engineer.getKlaxon(newSUV); // public 접근
 	delete newSUV;
-
 	getchar();
 	return 123;
 }
