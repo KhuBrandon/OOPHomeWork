@@ -22,12 +22,6 @@ void Car::klaxon(int n) {
 		std::cout << "  no horn \n";
 	}
 }
-void Car::weight(int n) { // public 추가
-	std::cout << n << "kg" << std::endl;
-}
-void Car::CarSeat(int n) { // protected 추가
-	std::cout << n << std::endl;
-}
 void Car::people() { // virtual 추가
 	std::cout << "4" << std::endl;
 }
