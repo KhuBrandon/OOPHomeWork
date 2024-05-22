@@ -14,11 +14,6 @@ void SUV::klaxon(int ii) {
 		std::cout << "Beep\n";
 	}
 }
-void SUV::Color(int n) { // private 추가
-	if (n % 3 == 0) std::cout << "White" << std::endl;
-	else if (n % 3 == 1) std::cout << "Black" << std::endl;
-	else std::cout << "Blue" << std::endl;
-}
 void SUV::people() { // virtual 추가
 	std::cout << "8" << std::endl;
 }
