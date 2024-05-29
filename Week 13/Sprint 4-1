@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+#include<Windows.h>
+#include<fstream>
+using namespace std;
+class Queue :public vector<int> {
+public:
+	Queue(int x, int y, int z) : NI(x), NO(y), capacity(z) {
+	}
+	int NI, NO, capacity, no, ni;
+	int elapsedSeconds = 0, lost = 0;
+	void Result() {
+		float full = 0;
+		while (elapsedSeconds < 120) {
+			Sleep(1000);
+			ni = rand() % NI;
+			no = rand() % NO;
+			if (capacity < this->size() + ni) {
+				lost += (this->size() + ni - capacity);
+				ni = capacity - this->size();
+			}
+			for (int i = 0; i < ni; i++) {
+				this->push_back(rand() % 100);
+			}
+			for (int i = 0; i < no; i++) {
+				if (this->size() != 0) {
+					this->erase(this->begin());
+				}
+			}
+			full += ((float)this->size() / capacity) * 100;
+			elapsedSeconds++;
+		}
+		cout << "Queue Fullness : " << full / 120 << "%\n";
+		cout << "Lost of Packets : " << lost << endl;
+	}
+};
+int main() {
+	Queue Q1(10, 10, 50);
+	Q1.Result();
+	Queue Q2(50, 50, 50);
+	Q2.Result();
+	Queue Q3(10, 10, 100);
+	Q3.Result();
+	Queue Q4(50, 50, 100);
+	Q4.Result();
+}
