@@ -1,0 +1,51 @@
+#include<iostream>
+#include<vector>
+#include<Windows.h>
+#include<fstream>
+using namespace std;
+int main() {
+	vector<int> Queue;
+	vector<int>::iterator it;
+	int elapsedSeconds = 0, NI = 10, NO = 10, ni, no, capacity = 100, lost=0;
+	int NofPackets[120], Max = 0;
+	float Avg = 0;
+	while (elapsedSeconds < 120) {
+		Sleep(1000);
+		ni = rand() % NI;
+		no = rand() % NO;
+		if (capacity < Queue.size() + ni) {
+			lost += (Queue.size() + ni - capacity);
+			ni = capacity - Queue.size();
+		}
+		for (int i = 0; i < ni; i++) {
+			Queue.push_back(rand() % 100);
+		}
+		for (int i = 0; i < no; i++) {
+			if (Queue.size() != 0) {
+				Queue.erase(Queue.begin());
+			}
+		}
+		cout << "Elapsed Time [" << elapsedSeconds << "]" << endl;
+		cout << "Size of Packet : " << Queue.size() << endl;
+		Avg += Queue.size();
+		if (Max <= Queue.size()) {
+			Max = Queue.size();
+		}
+		NofPackets[elapsedSeconds] = Queue.size();
+		elapsedSeconds++;
+	}
+	cout << "Average of NofPackets : ";
+	cout << Avg / 120 << endl;
+	cout << "Max value of NOfPackets : ";
+	cout << Max;
+	ofstream x("text1.txt");
+	if (!x) {
+		cout << "can't open text.txt\n";
+		return 0;
+	}
+	for (int i = 0; i < 120; i++) {
+		x << NofPackets[i] << endl;
+	}
+	x.close();
+	return 1;
+}
