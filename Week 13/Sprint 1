@@ -1,0 +1,14 @@
+#include <iostream>
+#include <Windows.h> // Sleep( )
+using namespace std;
+int main() {
+	int elapsedSeconds = 0, x, T = 1;
+	while (elapsedSeconds < 10) {
+		Sleep(T * 1000);
+		x = rand() % 9;  // 0~99 random  
+		elapsedSeconds++;
+		cout << "  Elapsed time[sec] = "
+			<< elapsedSeconds << "   " << x << endl;
+	}
+	return 123;
+}
