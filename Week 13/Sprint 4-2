@@ -34,12 +34,12 @@ public:
 	}
 };
 int main() {
-	Queue Q1(10, 10, 100);
-	Queue Q2(10, 50, 100);
-	Queue Q3(10, 100, 100);
-	Queue Q4(10, 150, 100);
-	Queue Q5(10, 200, 100);
-	ofstream x("sprint4.txt");
+	Queue Q1(10, 50, 100);
+	Queue Q2(10, 100, 100);
+	Queue Q3(10, 150, 100);
+	Queue Q4(10, 200, 100);
+	Queue Q5(10, 250, 100);
+	ofstream x("sprint4-1.txt");
 	if (!x) {
 		cout << "can't open text.txt\n";
 		return 0;
