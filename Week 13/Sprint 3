@@ -38,7 +38,7 @@ int main() {
 	cout << Avg / 120 << endl;
 	cout << "Max value of NOfPackets : ";
 	cout << Max;
-	ofstream x("text1.txt");
+	ofstream x("Sprint3.txt");
 	if (!x) {
 		cout << "can't open text.txt\n";
 		return 0;
