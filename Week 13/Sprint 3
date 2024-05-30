@@ -46,7 +46,7 @@ int main() {
 		return 0;
 	}
 	for (int i = 0; i < 120; i++) {
-		x << i <<" "<< NofPackets[i] << endl;
+		x << i+1 <<" "<< NofPackets[i] << endl;
 	}
 	x.close();
 	return 1;
