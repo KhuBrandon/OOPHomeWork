@@ -2,6 +2,7 @@
 #include<vector>
 #include<Windows.h>
 #include<fstream>
+#include<ctime>
 using namespace std;
 class Queue :public vector<int> {
 public:
@@ -35,6 +36,7 @@ public:
 	}
 };
 int main() {
+	srand(time(0));
 	Queue Q1(10, 10, 50);
 	Q1.Result();
 	Queue Q2(50, 50, 50);
