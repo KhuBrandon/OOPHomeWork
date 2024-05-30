@@ -2,11 +2,13 @@
 #include<vector>
 #include<Windows.h>
 #include<fstream>
+#include<ctime>
 using namespace std;
 int main() {
 	vector<int> Queue;
 	vector<int>::iterator it;
-	int elapsedSeconds = 0, NI = 10, NO = 10, ni, no, capacity = 100, lost=0;
+	srand(time(0));
+	int elapsedSeconds = 0, NI = 10, NO = 10, ni, no, capacity = 100, lost = 0;
 	int NofPackets[120], Max = 0;
 	float Avg = 0;
 	while (elapsedSeconds < 120) {
