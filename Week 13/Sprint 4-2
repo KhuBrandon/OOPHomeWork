@@ -39,7 +39,7 @@ int main() {
 	Queue Q3(10, 150, 100);
 	Queue Q4(10, 200, 100);
 	Queue Q5(10, 250, 100);
-	ofstream x("sprint4-1.txt");
+	ofstream x("sprint4.txt");
 	if (!x) {
 		cout << "can't open text.txt\n";
 		return 0;
